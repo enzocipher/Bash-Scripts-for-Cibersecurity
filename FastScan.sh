@@ -2,6 +2,7 @@
 # Usage: fastscan <IP> [--no-sweep] [--copy]
 #   --no-sweep : use an existing 'ports' file instead of doing the full sweep
 #   --copy     : copy the detected ports to clipboard (xclip/xsel/pbcopy)
+# I recommend to use this in Easy Difficulty Machines only.
 fastscan() {
   local TARGET="${1:-}" MODE_SWEEP=1 COPY_CLIP=0
   shift || true
