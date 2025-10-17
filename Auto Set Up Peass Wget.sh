@@ -102,24 +102,15 @@ PY
   else
     python -m http.server "$PORT" --bind "$HOST" >/dev/null 2>&1 &
   fi
+
   SERVER_PID=$!
-  echo "servidor http iniciado en $HOST:$PORT (pid $SERVER_PID)"
-  echo "presiona Ctrl-C o ENTER para detener el servidor."
-
-  # permitir detener con Enter: read en background; al recibir entrada, mata servidor
-  ( read -r && kill "$SERVER_PID" 2>/dev/null ) &
-  _READ_PID=$!
-
-  # esperar al servidor principal
-  wait "$SERVER_PID" 2>/dev/null
-
-  # si llegamos aquí, servidor terminó; matar el read si sigue vivo
-  if kill -0 "$_READ_PID" >/dev/null 2>&1; then
-    kill "$_READ_PID" 2>/dev/null || true
-  fi
-
-  # limpieza final
+  
+  echo "Servidor iniciado con PID: $SERVER_PID"
+  echo "El servidor se cerrará automáticamente en 30 segundos o presione CTRL-C para cerrarlo..."
+  
+  # Esperar 10 segundos y luego terminar el servidor
+  sleep 30
+  
+  echo "Tiempo completado. Cerrando servidor..."
   _sol_cleanup
-  trap - INT TERM EXIT
-  return 0
 }
