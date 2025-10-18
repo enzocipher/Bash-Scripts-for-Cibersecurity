@@ -64,7 +64,7 @@ fastscan() {
   fi
 
   echo "[*] Launching detailed scan -> $OUT_FILE"
-  sudo nmap --source-port 53 --min-rate 3000 -T4 -p"$PORTS_STR" -n -Pn "$TARGET" -oN "$OUT_FILE"
+  sudo nmap --source-port 53 --min-rate 3000 -T4 -sCV -p"$PORTS_STR" -n -Pn "$TARGET" -oN "$OUT_FILE"
   local rc=$?
   if [ $rc -ne 0 ]; then
     echo "warning: nmap finished with exit code $rc" >&2
